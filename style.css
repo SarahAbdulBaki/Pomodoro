@@ -1,0 +1,51 @@
+*{
+                margin: 0; /* extra space on the outside, think of it like  */
+                padding: 0; /*extra space on the inside*/
+            }
+            .background-image{
+                position: fixed;
+                z-index: 0;
+                background-image: url("tomato7.png");
+                background-size: cover; /*covers the full width and makes sure no blank spaces left*/
+                background-repeat: no-repeat;
+                height: 100vh; /* vh is viewport height 1vh means 1 percent of the height of the current browser (window viewport) when we set it to 100 it takes 100 percent of the vertical viewport regardless of what browser u use */
+                width:100%;
+            }
+            .button-container{
+                display: flex;
+                justify-content:center;
+                align-items:normal;
+                gap: 20px;
+                position: absolute;
+                top: 70%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 100%;
+            }
+            .start-button{
+        
+            
+            z-index: 1;
+            }
+            .stop-button{
+
+             z-index:1;
+            }
+            .pause-button{
+             z-index:1;
+            }
+            #mybtn{
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+            background-color: rgb(200, 123, 46);
+            font-size: 30px;
+            font-family: "Pixelify Sans", sans-serif;
+            text-shadow: #371d11;
+            letter-spacing:4px;
+            padding:10px 20px;
+            border-color:#371d11;
+            top: 20px;
+            left: 20px;
+        
+            }
