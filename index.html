@@ -1,34 +1,113 @@
 <!DOCTYPE html>
 <html>
     
-    <head> <! the head is the setup of the code, it tells the browser what ingredients we will use like title, style. head =setup , body = step by step instructions >
+    <head> <!-- the head is the setup of the code, it tells the browser what ingredients we will use like title, style. head =setup , body = step by step instructions -->
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="icon" id="favicon"  type="image/png" href="tomato_icon.png"> <!-- favicon-->
         <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-        <title> pomodoro timer!</title> <!title of website (what shows in browser)>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> pomodoro timer!</title> <!--title of website (what shows in browser)-->
 
     </head>
 
 
-    <body> <! body of the code what the user will see, basically instructions of the code>
-       <div class="background-image"></div> <!we treat it as a class or an object>
-       <button id="mybtn">CHANGE BACKGROUND</button>
-       
-       <div class="button-container">
-                <div class="start-button">
-                    <img src= "start.png" alt="start button" width="180">
-            </div>
+    <body> <!-- body of the code what the user will see, basically instructions of the code-->
+        <!--to do list
+        <form class="input-area">
+            <input type="text" id="task-input" placeholder="Add a new task...">
+            <button type="submit" id="add-task-btn"><i class="fa-solid fa-plus"></i></button>
+        </form>
+        <div class="todos-container">
+            <ul id="task-list"></ul>
+            <img class
+        </div>-->
+        
+       <div class="background-image"></div> <!--we treat it as a class or an object-->
+       <div class="background-fullscreen"> 
+            <button id="mybtn">CHANGE BACKGROUND</button>
+            <button id="btn">GO FULLSCREEN</button>  
+        </div>
+       <button id ="volume">
+            <img src="no_volume.png" id="icon" width="50">
+       </button>
 
-            <div class="stop-button">
-                    <img src="stop.png" alt="stop button" width="180">
-            </div>
+        
+        <!--music player-->
+        <div id="playlist-dropdown" style="display:none;">
+            <audio id="audio"></audio>
+            <div class="music-player">
+                <h1 class="music-name">song one</h1>
+                <p class="artist-name">artist 1</p>
+                <div class="disk"></div>
+                <div class="song-slider">
+                    <input type="range" value="0" class="seek-bar">
+                    <span class="current-time">00:00</span>
+                    <span class="song-duration">00:00</span>
+                </div>
+                <div class="music-player-controls">
+                    <button class="btn backward-btn"><img src="pre.png" alt="previous button"></button>
+                    <button class="play-btn pause">
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <button class="btn forward-btn"><img src="nxt.png" alt="next button"></button>
 
-            <div class="pause-button">
-                    <img src="pause.png" alt="pause button" width="180">
+                </div>
+
             </div>
+       </div> 
+
+       <!--pomodoro timer-->
+       <div id="feh-pomodoro">
+            <div id="feh-pomodoro-overlay">
+                <img src="spinner.gif" alt="">
+             </div>
+
+        <span class="btn-icon" id="feh-toggle-settings"><img src="gear.png" width="50px"></span>
+        
+        <div id="feh-timer-progress">
+            <svg class="circle-timer" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" class="circle-background"></circle>
+                <circle cx="50" cy="50" r="45" class="circle-progress"></circle>
+                <text id="feh-timer-time" x="50" y="50" text-anchor="middle" dy=".3em" font-size="18">25:00</text>
+                <text id="feh-timer-pause" x="50" y="68" text-anchor="middle" dy=".3em" font-size="7">Paused</text>
+                <text id="feh-timer-rest" x="50" y="68" text-anchor="middle" dy=".3em" font-size="7">Rest</text>
+            </svg>
+        </div>
+
+        <div id="feh-timer-sessions">
+            <p id="feh-completed-label">COMPLETED WORK SESSIONS:</p>
+            <p id="feh-completed-sessions">0</p>
+        </div>
+
+        <div id="feh-timer-functions">
+            <div id="feh-timer-settings">
+                <span class="btn-icon" id="feh-close-settings"><img src="close.png" ></span>
+                <form id="feh-timer-form">
+                    <p class="feh-timer-line">
+                        <label for="work-duration">POMODORO:</label>
+                        <input type="number" id="work-duration" value="25" min="1"> 
+                    </p>
+
+                    <p class="feh-timer-line">
+                        <label for="rest-duration">REST:</label>
+                        <input type="number" id="rest-duration" value="5" min="1"> 
+                    </p>
+                </form>
+            </div>
+            <div id="feh-timer-buttons">
+                <button id="pause-btn"><img src="pause.png" width="50"></button>
+                <button id="start-btn"><img src="play.png" width="50"></button>
+            </div>
+        </div>
     </div>
+   
     <script src="script.js"></script>
+    
+
+    
     </body>
     
         

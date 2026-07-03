@@ -1,6 +1,207 @@
 *{
                 margin: 0; /* extra space on the outside, think of it like  */
                 padding: 0; /*extra space on the inside*/
+                box-sizing: border-box;
+                font-family: "Pixelify Sans", sans-serif;
+                
+            }
+            .wrapper{
+                position: relative;
+                width: 100%;
+                max-width: 1100px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            body{
+                display: flex;
+                justify-content: center;
+                
+            }
+            
+            
+            /*music player*/
+            .music-player{
+                width: 350px;
+                height: 420px;
+                top: 70px;
+                right: 20px;
+                border-radius: 20px;
+                background: rgba(190, 16, 10, 0.937);
+                overflow: hidden;
+                color: rgb(255, 252, 252);
+                position: fixed;
+                z-index: 1;
+            }
+            .music-name,.artist-name{
+                text-align: center;
+                text-transform: uppercase;
+                color: #ffffff;
+            }
+            .music-name{
+                font-size: 40px;
+                font-weight: 500px;
+                margin-bottom: 10px;
+
+            }
+            .artist-name{
+                font-size: 20px;
+
+            }
+            .disk{
+                position: relative;
+                display: block;
+                margin: 20px auto;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background: black;
+                background-image: url("tomatotrack1.jpg");
+                background-size: cover;
+                background-repeat: no-repeat;
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.333);
+                animation: rotate 20s linear infinite;
+                animation-play-state:paused ;
+            }
+            .disk.play{
+                animation-play-state: running;
+            }
+            .disk::before{
+                content: '';
+                position: absolute;
+                top: 50%; /*how to center absolute element*/
+                left: 50%;
+                transform: translate(-50%,-50%);
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+
+            }
+
+            .song-slider{
+                width: 80%;
+                margin-left: 10%;
+                position: relative;
+            }
+            .seek-bar{
+                -webkit-appearance: none;
+                width: 100%;
+                height: 5px;
+                border-radius: 10px;
+                background-color: rgb(255, 255, 255);
+                overflow: hidden;
+                cursor: pointer;
+            }
+            .seek-bar::-webkit-slider-thumb{
+                -webkit-appearance: none;
+                width: 1px;
+                height: 20px;
+                background-color: rgb(97, 139, 13);
+                box-shadow: -400px 0 0 400px rgb(97, 139, 13);
+            }
+            .song-duration,.current-time{
+                font-size: 14px;
+            }
+            .song-duration{
+                position: absolute;
+                right: 0%;
+            }
+            .music-player-controls{
+                width: 60%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: auto;
+                margin-top: 20px;
+            }
+            .play-btn{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background-color: #ffffff;
+                cursor: pointer;
+                border: none;
+                margin-left:0 ;
+            }
+            .play-btn span{
+                position: absolute;
+                display: flex;
+                top: 50%;
+                left: 25%;
+                transform: translateY(-50%);
+                width: 10px;
+                height: 30px;
+                border-radius: 2px;
+                background: #4c1600;
+                transition: .5s;
+                clip-path: polygon(0 0,100% 0,100% 100%, 0% 100%);
+            }
+            .play-btn span:nth-child(2){
+                left: 55%;
+                transform-origin: center;
+            }
+            .play-btn.pause span:nth-child(1){
+                width: 35%;
+                left: 53%;
+                transform: translate(-50%,-50%);
+                border-radius: 0;
+                clip-path: polygon(0 0, 100% 50%,100% 50%,0% 100%);
+            }
+            .play-btn.pause span:nth-child(2){
+                width: 0;
+                opacity: 0;
+            }
+            
+            .play-btn.pause{
+                animation: pulse 2s linear infinite;
+            
+            }
+            .play-btn:hover{
+                transform: scale(1.1);
+                filter: grayscale(0%);
+            }
+            @keyframes pulse{
+                0%{
+                    box-shadow: 0;
+                }
+                50%{
+                    box-shadow: 0 0 0 5px rgba(24, 119, 0, 0);
+                }
+                100%{
+                    box-shadow: 0 0 0 5px rgba(26, 131, 2, 0);
+                }
+            }
+            .btn.forward-btn:hover{
+                transform: scale(1.1);
+                filter: grayscale(0%);
+            }
+            .btn.backward-btn:hover{
+                transform: scale(1.1);
+                filter: grayscale(0%);
+
+            }
+                
+            .btn{
+                width: 40px;
+                height: 40px;
+                background-color: rgb(255, 255, 255);
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: none;
+                cursor: pointer;
+            }
+            @keyframes rotate{
+                from{
+                    transform: rotate(0deg);
+                }
+                to{
+                    transform: rotate(360deg);
+                }
             }
             .background-image{
                 position: fixed;
@@ -11,41 +212,381 @@
                 height: 100vh; /* vh is viewport height 1vh means 1 percent of the height of the current browser (window viewport) when we set it to 100 it takes 100 percent of the vertical viewport regardless of what browser u use */
                 width:100%;
             }
-            .button-container{
-                display: flex;
-                justify-content:center;
-                align-items:normal;
-                gap: 20px;
-                position: absolute;
-                top: 70%;
-                left: 50%;
-                transform: translate(-50%,-50%);
-                width: 100%;
+            body.rest-mode .background-image{
+               filter:blur(5px) grayscale(0.5) brightness(1) saturate(1.5);
             }
-            .start-button{
-        
-            
-            z-index: 1;
+            body.rest-mode .circle-progress{
+                stroke: #1b9317;
             }
-            .stop-button{
+            body.timer-paused#feh-timer-pause{
+                opacity: 1;
+            }
+            body.timer-running .circle-progress{
+                transition: all 1s linear;
+            }
+            main{
+                width: 25rem;
+                height:25rem;
+                border-radius: 50%;
+                text-align: center;
+                margin: 0 auto;
+                margin-bottom: 2rem;
+                
+            }
+            h1{
+                font-size: 2rem;
+                margin: 20px auto;
+            }
 
-             z-index:1;
+            .background-fullscreen{
+                position: fixed;
+                top: 3vh;
+                left:1vw;
+                z-index: 1;
+                display:flex;
+                gap:20px;
+                
+            } /*Responsive*/
+            @media screen and (min-width:320px) and (max-width:600px){
+                .container{
+                    transform: scale(0.9);
+                }
+                .volume{
+                    transform: scale(0.9);
+                }
+                .background-fullscreen{
+                    flex-direction: 12px;
+                    padding: 6px 10px;
+                }
             }
-            .pause-button{
-             z-index:1;
-            }
-            #mybtn{
-            position: relative;
-            z-index: 1;
+            
+            
+            #mybtn{ /*change background button*/
+            /*position: fixed;
+            z-index: 1;*/
             color: #ffffff;
-            background-color: rgb(200, 123, 46);
-            font-size: 30px;
-            font-family: "Pixelify Sans", sans-serif;
-            text-shadow: #371d11;
+            background-color: #4c1600;
+            font-size: 20px;
             letter-spacing:4px;
             padding:10px 20px;
-            border-color:#371d11;
-            top: 20px;
-            left: 20px;
-        
+            border-radius: 15px;
+            text-shadow: -1.5px 2px  #a76f3c;
+            cursor: pointer;
             }
+            #mybtn:hover{
+                transform: scale(1.1);
+                filter: grayscale(0%);
+
+            }
+            #btn{ /*full screen button*/
+               /* z-index: 1;
+                position: fixed;*/
+                color: #ffffff;
+                background-color: #4c1600;
+                font-size: 21px;
+                letter-spacing:4px;
+                padding:10px 20px;
+                border-radius: 15px;
+                text-shadow: -1.5px 2px  #a76f3c;
+                cursor: pointer;
+                /*top: 3vh;
+                left: calc(1vw+200px);/*always 220px right of first button*/
+
+            } 
+            #btn:hover{
+                transform: scale(1.1);
+                filter: grayscale(0%);
+
+            }
+            .volume{
+             z-index: 5;
+             position:fixed;
+             bottom: 55vh;
+             right: 1vw;
+            }
+
+            #volume {
+             background: none;
+             border: none;
+             cursor: pointer;
+             position: fixed;
+             top: 1vh;
+             right: 1vw;
+             z-index: 5;
+            }
+            #volume:hover{
+                transform: scale(1.1);
+                filter: grayscale(0%);
+
+            }
+            #icon{
+                width: 50px;
+                height: 50px;
+            }
+            /*pomodoro timer*/
+            #feh-pomodoro{
+                border: 5px solid red;
+                position: relative;
+                width: 100%;
+                max-width: 350px;
+                margin: 0 auto;
+                left: 50px;
+                margin-top: 100px;
+                padding: 55px 25px 25px 25px;
+                border-radius: 20px;
+                background: rgba(178, 1, 1, 0.301);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.811);
+                -webkit-backdrop-filter:blur(7.7px) ;
+                border: 1px solid rgba(189, 9, 9, 0.64);
+
+            }
+
+            /*overlay*/
+            #feh-pomodoro-overlay{
+                background: #ffffff;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                border-radius: 20px;
+                z-index: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease-in-out;
+            }
+            body.page-loaded #feh-pomodoro-overlay{
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+            #feh-pomodoro-overlay img{
+                width: 150px;
+                height:150px;
+            }
+
+            /*generic button + toggle button*/
+            .btn-icon{
+                border-radius: 20px;
+                position: absolute;
+                right: 0;
+                width:50px;
+                display:flex;
+                font-size: 24px;
+                justify-content:center;
+                color: #fc4700;
+                padding-top: 10px;
+                cursor: pointer;
+                transition: all 0.3s ease-in-out;
+            }
+            #feh-toggle-settings{
+                top: 20px;
+                right: 20px;
+                height:60px;
+            }
+            /*progress*/
+
+            #feh-timer-progress{
+                display: flex;
+                justify-content: center;
+                margin-bottom: 40px;
+            }
+                .circle-timer{
+                    width: 270px;
+                    height: 270px;
+                }
+                    .circle-background{
+                        stroke:rgb(255, 255, 255) ;
+                        stroke-width: 7;
+                        fill: none;
+                    }
+                    .circle-progress{
+                        stroke:#ca1111;
+                        stroke-width:8;
+                        stroke-linecap: round;
+                        stroke-dasharray:283;
+                        stroke-dashoffset: 0;
+                        fill: none;
+                        transform-origin: 50% 50%;
+                        transform: rotate(-90deg);
+                    }
+                        #feh-timer-time{
+                            fill: rgb(255, 255, 255);
+                            font-weight: bold;
+                            
+                        }
+                        #feh-timer-rest,#feh-timer-pause{
+                            opacity: 0;
+                            transition: all 0.3s ease-in-out;
+                            fill: #a76f3c;
+                        }
+body.settings-active #feh-timer-settings{
+    opacity: 1;
+    visibility: visible;
+}
+body.settings-active #feh-timer-sessions,body.settings-active #feh-timer-buttons{
+    opacity: 0;
+    visibility: hidden;
+}
+/*completed sessions*/
+#feh-timer-sessions{
+    border-radius:50px;
+    background: #1b9317;
+    display:flex;
+    color:#4c1600;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+    #feh-timer-sessions p{
+        padding:12px;
+    }
+    p#feh-completed-label{
+        width: 80%;
+        text-align: center;
+        color: #ffffff;
+    }
+    p#feh-completed-sessions{
+        font-weight: bold;
+        color: #ffffff;
+        font-size: 20px;
+    }
+      
+/*timer functions*/
+#feh-timer-functions{
+    height: 145px;
+    position: relative;
+    color: #055813;
+    padding: 15px;
+}
+/*settings*/
+#feh-timer-settings{
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+#feh-close-settings{
+    top: -55px;
+    height:80px;
+    background: #9a0303;
+    color: #ffffff;
+}
+#feh-close-settings img{
+    width: 25px;
+    height: 25px;
+}
+
+#feh-close-settings:hover{
+    color: #ffffff;
+}
+#feh-timer-form{
+    border-radius: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #9a0303;
+    padding: 20px;
+    z-index: 1;
+}
+.feh-timer-line{
+    display: flex;
+    margin-bottom: 20px;
+}
+.feh-timer-line:last-child{
+    margin-bottom: 20px;
+}
+.feh-timer-line * {
+    font-size: 18px;
+}
+
+.feh-timer-line label{
+    width: 50%;
+    color: #ffffff;
+    padding: 10px 0 10px 0;
+}
+.feh-timer-line input{
+    width: 50%;
+    color: #120606;
+    background: #ffffff;
+    margin-left: -2px;
+    border-radius: 10px;
+    border: 0 none;
+    text-align: center;
+}
+#feh-timer-form input::-webkit-outer-spin-button,#feh-timer-form input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+#feh-timer-form input[type=number]{
+    -moz-appearance:textfield;
+
+}
+
+
+
+/*play/pause/stop buttons*/
+#feh-timer-buttons{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+#feh-timer-buttons button{
+    background-color: #ffffff;
+    position: absolute;
+    border: 0px none;
+    cursor:pointer;
+    width: 60px;
+    height: 60px;
+    display: block;
+    font-size:22px;
+    color: rgb(255, 255, 255);
+    border-radius: 100px;
+}
+
+body.timer-running #start-btn{
+    opacity: 0;
+    visibility: hidden;
+
+}
+#start-btn img{
+    width: 40px;
+    margin-bottom: -5px;
+    margin-left: 5px;
+    
+}
+
+#pause-btn img{
+    width: 40px;
+    margin-bottom:-7px;
+    margin-left: -3px;
+}
+
+body.timer-paused #start-btn{
+    opacity: 1;
+    visibility: visible;
+
+}
+
+body.timer-paused:not(.rest-mode) #feh-timer-pause,
+body.rest-mode #feh-timer-rest,
+body.rest-mode.timer-paused#feh-timer-pause{
+    opacity: 1;
+    fill: #120606;
+
+}
+
+
+
+
+
+
+               
+
+
+           
+            
